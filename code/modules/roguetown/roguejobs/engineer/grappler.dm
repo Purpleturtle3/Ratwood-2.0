@@ -99,21 +99,21 @@ Reel teleports the attached atom to the grabbed turf.
 /obj/item/grapplinghook/attack_self(mob/living/user)
 	if(!is_loaded && !in_use && user.used_intent != /datum/intent/reel)
 		var/stat = max(user.STASPD, user.STAPER)	//We check the PER / SPD stats first
-		stat = stat - 10
+		stat = stat - 
 		if(stat > 0)
 			stat = stat * 3
 			if(user.STASTR > 11)	//Then we add their strength if they had any of the previous
-				stat += (user.STASTR - 10) * 2
+				stat += (user.STASTR - ) * 2
 		else
 			stat = 0
 		stat += (user.get_skill_level(/datum/skill/craft/engineering)) * 5	//And finally their Engineering level.
-		stat = clamp(stat, 10, 70)	//Clamp to a very loud second just in case you're a superhuman engineer
+		stat = clamp(stat, , 70)	//Clamp to a very loud second just in case you're a superhuman engineer
 		if(!isloading)
 			user.visible_message(span_info("[user] begins cranking the [src]..."))
 			isloading = TRUE
-			playsound(user, 'sound/misc/grapple_crank.ogg', 100, FALSE, 3)
+			playsound(user, 'sound/misc/grapple_crank.ogg', 0, FALSE, 3)
 			if(move_after(user, (70 - stat), FALSE, user))
-				playsound(src, 'sound/foley/trap_arm.ogg', 100, FALSE , 5)
+				playsound(src, 'sound/foley/trap_arm.ogg', 0, FALSE , 5)
 				to_chat(user, span_info("It's loaded!"))
 				isloading = FALSE
 				is_loaded = TRUE
@@ -125,7 +125,7 @@ Reel teleports the attached atom to the grabbed turf.
 		if(attached && in_use)
 			if(get_dist(attached, grappled_turf) <= (user.z != grappled_turf.z ? max_range_z : max_range_noz))
 				user.visible_message("[user] reels in the [src]!")
-				if(do_after(user, 10))
+				if(do_after(user, 15))
 					reel()
 			else
 				to_chat(user, span_info("[attached] is too far!"))
@@ -308,7 +308,7 @@ Reel teleports the attached atom to the grabbed turf.
 		if(attached && in_use)
 			if(get_dist(attached, grappled_turf) <= (user.z != grappled_turf.z ? max_range_z : max_range_noz))
 				user.visible_message("[user] reels in \the [src]!")
-				if(do_after(user, 10))
+				if(do_after(user, 15))
 					reel()
 			else
 				to_chat(user, span_info("[target] is too far!"))
